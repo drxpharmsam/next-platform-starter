@@ -15,7 +15,7 @@ import configparser
 import logging
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -76,8 +76,8 @@ class Medicine(Base):
     side_effects = Column(Text)
     contraindications = Column(Text)
     storage_conditions = Column(String(255))
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
 
 # ---------------------------------------------------------------------------
@@ -177,7 +177,7 @@ def build_connection_string(cfg: configparser.ConfigParser) -> str:
     raise ValueError(f"Unsupported database type: '{db_type}'")
 
 
-def read_excel(file_path: str, sheet_name) -> pd.DataFrame:
+def read_excel(file_path: str, sheet_name: str | int) -> pd.DataFrame:
     """Load the spreadsheet and normalise column headers."""
     path = Path(file_path)
     if not path.exists():
