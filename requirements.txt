@@ -1,0 +1,23 @@
+# -------------------------------------------------------
+# Medicine Autobot – Python dependencies
+# -------------------------------------------------------
+# Core dependencies (always required)
+pandas>=2.0.0
+openpyxl>=3.1.0          # required by pandas to read .xlsx files
+SQLAlchemy>=2.0.0
+
+# -------------------------------------------------------
+# Optional database drivers – uncomment the one you need
+# -------------------------------------------------------
+
+# SQLite   → built into Python, NO extra driver needed
+
+# MySQL / MariaDB  → uncomment ONE of these:
+# PyMySQL>=1.1.0
+# mysqlclient>=2.2.0
+
+# PostgreSQL → uncomment:
+# psycopg2-binary>=2.9.0
+
+# Microsoft SQL Server → uncomment:
+# pyodbc>=5.0.0
